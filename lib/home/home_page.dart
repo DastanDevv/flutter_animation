@@ -12,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   final duration = const Duration(seconds: 3);
   bool isDay = true;
 
+  /// Changes the theme between day and night.
   void changeTheme() {
     setState(() {
       isDay = !isDay;
@@ -20,20 +21,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    const tabColor = Colors.white24;
+    final height =
+        MediaQuery.of(context).size.height; // Get the height of the screen
+    final width =
+        MediaQuery.of(context).size.width; // Get the width of the screen
+    const tabColor = Colors.white24; // Define a constant color for tabs
 
     List<Color> lightBgColors = [
-      const Color(0xFF8C2480),
-      const Color(0xFFCE587D),
-      const Color(0xFFFF9485),
-      // if (isFullSun) const Color(0xFFFF9D80),
+      const Color(0xFF8C2480), // Color 1 for light background
+      const Color(0xFFCE587D), // Color 2 for light background
+      const Color(0xFFFF9485), // Color 3 for light background
+      // if (isFullSun) const Color(0xFFFF9D80), // (Optional) Color 4 for light background based on a condition
     ];
+
     var darkBgColors = const [
-      Color(0xFF0D1441),
-      Color(0xFF283584),
-      Color(0xFF376AB2),
+      Color(0xFF0D1441), // Color 1 for dark background
+      Color(0xFF283584), // Color 2 for dark background
+      Color(0xFF376AB2), // Color 3 for dark background
     ];
 
     return Scaffold(
@@ -42,8 +46,11 @@ class _HomePageState extends State<HomePage> {
         width: width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
+            // Define the colors for the gradient based on whether it is day or night
             colors: isDay ? lightBgColors : darkBgColors,
+            // Set the starting point of the gradient at the top center
             begin: Alignment.topCenter,
+            // Set the ending point of the gradient at the bottom center
             end: Alignment.bottomCenter,
           ),
         ),
@@ -85,19 +92,25 @@ class _HomePageState extends State<HomePage> {
             child: DefaultTabController(
               length: 2,
               child: TabBar(
+                // Call the changeTheme function when a tab is tapped
                 onTap: (value) => changeTheme(),
+                // Set the color of the selected tab's label to black
                 labelColor: Colors.black,
+                // Set the color of the unselected tab's label to white
                 unselectedLabelColor: Colors.white,
+                // Set the style of the tab's label
                 labelStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
+                // Set the decoration for the tab indicator
                 indicator: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(15),
                   ),
                 ),
+                // Define the tabs
                 tabs: const [
                   Tab(text: 'Morning Light'),
                   Tab(text: 'Night Dark'),
